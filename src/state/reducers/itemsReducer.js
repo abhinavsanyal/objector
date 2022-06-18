@@ -13,7 +13,7 @@ const initialState = [
     ],
   },
   {
-    category: "Bulldozer",
+    category: "Bulldozers",
     id: "Bulldozer 1",
     fields: [
       { type: "text", value: "Bulldozer 1", label: "Model" },
@@ -36,7 +36,7 @@ const reducer = (state = initialState, action) => {
       return items;
     case "REMOVE_ITEM":
       // Remove an item from inventory by id.
-      const updatedList = state.filter(item => item.id !== action.payload)
+      const updatedList = state.filter((item) => item.id !== action.payload);
       return updatedList;
     case "UPDATE_ITEM":
       // Update Item by id.

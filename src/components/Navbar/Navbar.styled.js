@@ -20,6 +20,9 @@ export const NavItem = styled.span`
   &:hover{
       background-color: #232023;
   }
+  & a{
+    color: white !important;
+  }
 
 `;
 export const Logo = styled.div`

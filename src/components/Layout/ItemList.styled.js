@@ -6,10 +6,21 @@ export const ItemWrapper = styled.div`
   height: 100%;
   color: black;
   font-size: 14px;
+  flex-flow: row wrap;
+  justify-content: flex-start;
   margin-top: 30px;
 `;
 export const ItemField = styled.div`
   margin: 5px;
+`;
+export const Category = styled.div`
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  background: navajowhite;
+  padding 8px 15px;
+  border-radius:7%;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 `;
 
 export const RemoveIcon = styled.div`
@@ -24,7 +35,7 @@ export const RemoveIcon = styled.div`
   font-size: 12px;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   opacity: 0;
-  cursor: pointer
+  cursor: pointer;
 `;
 export const ItemCard = styled.div`
   background-color: #98afc7;
