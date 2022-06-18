@@ -11,16 +11,6 @@ export const ItemWrapper = styled.div`
 export const ItemField = styled.div`
   margin: 5px;
 `;
-// export const RemoveIcon = styled(Icon)({
-//   position: "absolute",
-//   height: "20px",
-//   width:"20px",
-//   background: "white",
-//   borderRadius: "50%",
-//   top: "-0.8em",
-//   right: "-0.8em",
-//   boxShadow: "0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)"
-// });
 
 export const RemoveIcon = styled.div`
   position: absolute;

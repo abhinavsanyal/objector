@@ -1,12 +1,12 @@
 import Navbar from "./components/Navbar/Navbar";
-import { Container } from "./components/Layout/Container";
+import  PageSelector from "./components/Layout/AllPage";
 import { LayoutWrapper } from "./App.styled";
 
 function App() {
   return (
     <LayoutWrapper>
       <Navbar />
-      <Container />
+      <PageSelector />
     </LayoutWrapper>
   );
 }
