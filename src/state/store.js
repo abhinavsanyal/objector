@@ -23,19 +23,33 @@ const initialState = {
         {fieldType:"number", fieldText: "Quantity", key: "quantity", component: "number"},
       ]
     },
-    items : [
+    items :[
       {
         category: "ChainSaws",
-        fields: [ 
-          { Model: "Chain saw 1",
-          Type: "Electric",
-          Grade: "A",
-          BarLength: 112,
-          Brand : "turbo",
-          BuildDate : 213414,
-          Quantity : 10}
-        ]
-    }
+        id: "ChainSaw 1",
+        fields: [
+          { type: "text", value: "Chain saw 1", label: "Model" },
+          { type: "text", value: "Electric", label: "Type" },
+          { type: "text", value: "A1", label: "Grade" },
+          { type: "number", value: 123, label: "Bar length" },
+          { type: "text", value: "Chain saw 1", label: "Brand" },
+          { type: "date", value: "Chain saw 1", label: "Build Date" },
+          { type: "number", value: 10, label: "Quantity" },
+        ],
+      },
+      {
+        category: "Bulldozer",
+        id: "Bulldozer 1",
+        fields: [
+          { type: "text", value: "Bulldozer 1", label: "Model" },
+          { type: "text", value: "Electric", label: "Type" },
+          { type: "text", value: "A1", label: "Grade" },
+          { type: "number", value: 123, label: "Bar length" },
+          { type: "text", value: "Chain saw 1", label: "Brand" },
+          { type: "date", value: "Chain saw 1", label: "Build Date" },
+          { type: "number", value: 10, label: "Quantity" },
+        ],
+      },
     ]
   }
   
