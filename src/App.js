@@ -1,6 +1,6 @@
 import Navbar from "./components/Navbar/Navbar";
 import PageSelector from "./components/Layout/PageSelector";
-import ManageCategory from "./components/Layout/ManageCategory";
+import ManageCategory from "./components/Layout/CategoryManager/ManageCategory";
 import { LayoutWrapper } from "./App.styled";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 

@@ -37,8 +37,7 @@ const AddItemButton = ({ categories, addItem, showDropdown, category }) => {
           addItemHandler();
         }}
       >
-        {" "}
-        Add Item{" "}
+        { !showDropdown ? `Add ${category}`: `Add Item` }
       </Button>
       { showDropdown &&
       <Menu compact>

@@ -4,43 +4,36 @@ const initialState = {
       fieldType: "text",
       fieldText: "Model",
       key: "model",
-      component: "dropdown",
     },
     {
       fieldType: "text",
       fieldText: "Type",
       key: "type",
-      component: "dropdown",
     },
     {
       fieldType: "text",
       fieldText: "Grade",
       key: "grade",
-      component: "dropdown",
     },
     {
       fieldType: "number",
       fieldText: "Bar Length",
       key: "barLength",
-      component: "number",
     },
     {
       fieldType: "text",
       fieldText: "Brand",
       key: "brand",
-      component: "dropdown",
     },
     {
       fieldType: "date",
       fieldText: "Build Date",
       key: "buildDate",
-      component: "datePicker",
     },
     {
       fieldType: "number",
       fieldText: "Quantity",
       key: "quantity",
-      component: "number",
     },
   ],
   Bulldozers: [
@@ -48,37 +41,31 @@ const initialState = {
       fieldType: "text",
       fieldText: "Model",
       key: "model",
-      component: "dropdown",
     },
     {
       fieldType: "text",
       fieldText: "Power Net",
       key: "power_net",
-      component: "dropdown",
     },
     {
       fieldType: "text",
       fieldText: "Operating Weight",
       key: "operatingWeight",
-      component: "dropdown",
     },
     {
       fieldType: "text",
       fieldText: "Brand",
       key: "brand",
-      component: "dropdown",
     },
     {
       fieldType: "date",
       fieldText: "Build Date",
       key: "builDate",
-      component: "datePicker",
     },
     {
       fieldType: "number",
       fieldText: "Quantity",
       key: "quantity",
-      component: "number",
     },
   ],
 };
@@ -86,6 +73,40 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case "ADD_CATEGORY":
+      return state;
+    case "UPDATE_CATEGORY":
+      const { updates, addField } = action.payload;
+      if (addField) {
+        const { type } = updates;
+        let fieldList = [...state[type]];
+        fieldList.push(
+          {
+            fieldType: "text",
+            fieldText: "",
+            key: `${type}_${state.length +1}`
+          }
+        )
+        return { ...state, [type]: fieldList };
+
+      } else {
+        const { text, type, value } = updates;
+        console.log("##onChangeHandler", updates);
+        let fieldList = [...state[type]];
+        let field = fieldList.find((field) => {
+          return field.fieldText === text;
+        });
+        field.fieldType = value;
+        return { ...state, [type]: fieldList };
+      }
+
+      return { ...state };
+    case "REMOVE_CATEGORY":
+      const modifiedList = { ...state };
+      return state;
+    case "UPDATE_CATEGORY_NAME":
+      const objectType = action.payload["type"];
+      const category = state[objectType];
+      console.log("####87907", category, objectType);
       return state;
     default:
       return state;

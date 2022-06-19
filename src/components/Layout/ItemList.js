@@ -14,7 +14,7 @@ const ItemCategory = ({ category }) => {
   return <Category>{category}</Category>;
 };
 
-export const ItemList = ({ items, filter, updateItem, removeItem }) => {
+export const ItemList = ({ items, updateItem, removeItem }) => {
   const onChangeHandler = (e, data, id) => {
     const { value, label } = data;
     updateItem({ value, label, id });

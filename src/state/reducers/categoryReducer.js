@@ -7,6 +7,10 @@ const reducer = (state = initialState, action) => {
       const categoryList = [...state];
       categoryList.push(action.payload);
       return categoryList ;
+    case "UPDATE_CATEGORY_LIST":
+      // update category list.
+      console.log("#CATEGORY:-",action.payload)
+      return state ;
     case "REMOVE_CATEGORY":
       // Remove existing category .
       const removeIdx = action.payload["id"];
