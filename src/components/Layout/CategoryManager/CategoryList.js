@@ -18,12 +18,16 @@ export const CategoryList = ({
   schema,
   updateCategory,
   removeCategory,
+  nameNewCategory
 }) => {
   const addFieldHandler = (type) => {
     updateCategory({ updates: { type }, addField: true });
   };
+  const removeFieldHandler = (category) => {
+    removeCategory(category);
+  };
 
-  const onChangeHandler = (type, data, text) => {
+  const onChangeHandler = (type, data, text, fieldType= false) => {
     const { value } = data;
     let updates = {};
     updates = {
@@ -31,7 +35,7 @@ export const CategoryList = ({
       text,
       type,
     };
-    updateCategory({ updates, addField: false });
+    updateCategory({ updates, addField: false , fieldType});
   };
   return (
     <div>
@@ -41,12 +45,13 @@ export const CategoryList = ({
           return (
             <div>
               <ItemCard key={index}>
-                <RemoveIcon id="remove"> X </RemoveIcon>
+                <RemoveIcon id="remove" onClick={()=>removeFieldHandler(category)}> X </RemoveIcon>
                 <ItemCategory category={category} />
                 <Item
                   fields={fields}
-                  id={category}
+                  id={category?category:""}
                   onChangeHandler={onChangeHandler}
+                  nameNewCategory={nameNewCategory}
                 />
               </ItemCard>
               <AddField onClick={() => {addFieldHandler(category)}}> Add atrribute</AddField>{" "}

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useLocation, Routes, Route } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { ItemList } from "./ItemList";
 import AddItemButton from "./AddItemButton";
 import { PageWrapper } from "./PageSelector.styled";
@@ -10,7 +10,7 @@ const PageSelector = ({ filter }) => {
   const [path, setPath] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
   const dispatch = useDispatch();
-  const { pathname , search, } = useLocation();
+  const { pathname } = useLocation();
 
   useEffect(() => {
     let match = pathname.split("/").pop()

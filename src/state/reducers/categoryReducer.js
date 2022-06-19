@@ -5,15 +5,18 @@ const reducer = (state = initialState, action) => {
     case "ADD_CATEGORY":
       // Add a new category .
       const categoryList = [...state];
-      categoryList.push(action.payload);
+      categoryList.push("");
       return categoryList ;
-    case "UPDATE_CATEGORY_LIST":
+    case "NAME_NEW_CATEGORY":
       // update category list.
-      console.log("#CATEGORY:-",action.payload)
-      return state ;
-    case "REMOVE_CATEGORY":
+      let newlyAdded = [...state];
+          newlyAdded.pop();
+          newlyAdded.push(action.payload)
+
+      return newlyAdded ;
+    case "REMOVE_CATEGORY_FROM_LIST":
       // Remove existing category .
-      const removeIdx = action.payload["id"];
+      const removeIdx = action.payload["index"];
       const filteredCategory = [...state];
       filteredCategory.splice(removeIdx, 1);
       return  filteredCategory;

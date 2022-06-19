@@ -77,5 +77,7 @@ export const AddField = styled.div`
   border-radius: 0.2em;
   padding: 0.5em 2em;
   cursor: pointer;
+  height: 2em;
+  max-width: 20em;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 `;

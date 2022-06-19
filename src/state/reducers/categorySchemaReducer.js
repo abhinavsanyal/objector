@@ -72,42 +72,51 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case "ADD_CATEGORY":
-      return state;
     case "UPDATE_CATEGORY":
-      const { updates, addField } = action.payload;
+      const { updates, addField, fieldType } = action.payload;
       if (addField) {
         const { type } = updates;
         let fieldList = [...state[type]];
-        fieldList.push(
-          {
-            fieldType: "text",
-            fieldText: "",
-            key: `${type}_${state.length +1}`
-          }
-        )
+        fieldList.push({
+          fieldType: "text",
+          fieldText: "",
+          key: `${type}_${state.length + 1}`,
+        });
         return { ...state, [type]: fieldList };
-
       } else {
         const { text, type, value } = updates;
-        console.log("##onChangeHandler", updates);
         let fieldList = [...state[type]];
         let field = fieldList.find((field) => {
           return field.fieldText === text;
         });
-        field.fieldType = value;
+        if (fieldType) {
+          field.fieldType = value;
+        } else {
+          field.fieldText = value;
+        }
         return { ...state, [type]: fieldList };
       }
-
       return { ...state };
     case "REMOVE_CATEGORY":
+      const type = action.payload;
       const modifiedList = { ...state };
-      return state;
+      delete modifiedList[type];
+      return modifiedList;
     case "UPDATE_CATEGORY_NAME":
       const objectType = action.payload["type"];
       const category = state[objectType];
-      console.log("####87907", category, objectType);
       return state;
+    case "UPDATE_NEW_CATEGORY_SCHEMA":
+      const categoryName = action.payload["value"];
+      const previousName = action.payload["previous"];
+      let newState = {...state};
+      let oldData = [];
+      if(newState[previousName]) {
+         oldData = [...newState[previousName]];
+         delete newState[previousName];
+      } 
+      newState[categoryName] = oldData;
+      return newState;
     default:
       return state;
   }

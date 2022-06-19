@@ -9,29 +9,31 @@
 import React from "react";
 import { CategoryList } from "./CategoryList";
 import { useSelector, useDispatch } from "react-redux";
-// const ItemCategory = ({ category }) => {
-//   return <Category>{category}</Category>;
-// };
 
-import { PageWrapper } from "./ManageCatergory.styled";
+import { AddField, PageWrapper } from "./ManageCatergory.styled";
 
 const ManageCategory = () => {
   const dispatch = useDispatch();
 
   const { categorySchema, categories } = useSelector((state) => state);
 
-  // Action dispatchers for item crud.
-  const addCategory = (payload) => {
-    dispatch({ type: "ADD_CATEGORY", payload });
+  // Action dispatchers for category crud.
+  const addCategory = () => {
+    dispatch({ type: "ADD_CATEGORY", payload:{} });
+  };
+  const nameNewCategory = (value, previous) => {
+    dispatch({ type: "NAME_NEW_CATEGORY", payload:value });
+    dispatch({ type: "UPDATE_NEW_CATEGORY_SCHEMA", payload:{value, previous }});
   };
   const updateCategory = (payload) => {
     dispatch({ type: "UPDATE_CATEGORY", payload });
   };
   const removeCategory = (payload) => {
+    dispatch({
+      type: "REMOVE_CATEGORY_FROM_LIST",
+      payload: { index: categories.indexOf(payload) },
+    });
     dispatch({ type: "REMOVE_CATEGORY", payload });
-  };
-  const updateCategoryName = (payload) => {
-    dispatch({ type: "UPDATE_CATEGORY_NAME", payload });
   };
 
   return (
@@ -39,10 +41,13 @@ const ManageCategory = () => {
       <CategoryList
         categories={categories}
         schema={categorySchema}
-        updateCategoryName={updateCategoryName}
         removeCategory={removeCategory}
         updateCategory={updateCategory}
+        nameNewCategory={nameNewCategory}
       />
+      <AddField onClick={()=>{
+        addCategory();
+      }}>Add category</AddField>
     </PageWrapper>
   );
 };
