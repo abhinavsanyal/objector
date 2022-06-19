@@ -45,7 +45,7 @@ const PageSelector = ({ filter }) => {
     return (
       <PageWrapper>
         <ItemList
-          items={filter?filterItems(): items}
+          items={filterItems()}
           updateItem={updateItem}
           removeItem={removeItem}
         />

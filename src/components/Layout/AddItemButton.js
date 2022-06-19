@@ -5,7 +5,6 @@ import { useSelector, useDispatch } from "react-redux";
 
 const AddItemButton = ({ categories, addItem, showDropdown, category }) => {
   const { categorySchema , items } = useSelector((state) => state);
-  const dispatch = useDispatch();
 
   const [isTypeSelected, setIsTypeSelected] = React.useState();
   const [selectedType, setSelectedType] = React.useState("");

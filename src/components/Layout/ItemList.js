@@ -30,8 +30,7 @@ export const ItemList = ({ items, updateItem, removeItem }) => {
                 removeItem(item.id);
               }}
             >
-              {" "}
-              X{" "}
+              X
             </RemoveIcon>
             <ItemCategory category={item.category} />
             <Item
