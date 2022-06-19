@@ -34,8 +34,7 @@ export const Item = ({ fields, onChangeHandler, nameNewCategory, id }) => {
           label={"Object Type"}
           id={id}
           onChangeHandler={(event, data) => {
-            const { value, text, type } = data;
-            nameNewCategory(value, id);
+            nameNewCategory(data.value, id);
           }}
         />
         {fields &&

@@ -1,4 +1,4 @@
-const initialState = ["ChainSaws","Bulldozers"]
+const initialState = ["ChainSaws", "Bulldozers"];
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -6,20 +6,21 @@ const reducer = (state = initialState, action) => {
       // Add a new category .
       const categoryList = [...state];
       categoryList.push("");
-      return categoryList ;
+      return categoryList;
     case "NAME_NEW_CATEGORY":
       // update category list.
       let newlyAdded = [...state];
-          newlyAdded.pop();
-          newlyAdded.push(action.payload)
+      let oldIndex = newlyAdded.indexOf(action.payload.previos);
+      newlyAdded.splice(oldIndex, 1);
+      newlyAdded.push(action.payload.value);
 
-      return newlyAdded ;
+      return newlyAdded;
     case "REMOVE_CATEGORY_FROM_LIST":
       // Remove existing category .
       const removeIdx = action.payload["index"];
       const filteredCategory = [...state];
       filteredCategory.splice(removeIdx, 1);
-      return  filteredCategory;
+      return filteredCategory;
     default:
       return state;
   }

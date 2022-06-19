@@ -96,7 +96,6 @@ const reducer = (state = initialState, action) => {
         }
         return { ...state, [type]: fieldList };
       }
-      return { ...state };
     case "REMOVE_CATEGORY":
       const type = action.payload;
       const modifiedList = { ...state };

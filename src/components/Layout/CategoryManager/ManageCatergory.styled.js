@@ -65,6 +65,7 @@ export const StyledFlexContainer = styled.div`
   display: flex;
   width: 100%;
   justify-content: flex-start;
+  align-items: center
 `;
 export const AddField = styled.div`
   display: flex;

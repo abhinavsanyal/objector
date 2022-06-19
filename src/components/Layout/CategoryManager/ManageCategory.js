@@ -1,11 +1,3 @@
-// import React from 'react';
-
-// const ManageCategory = () => {
-//   return (
-//     <div>ManageCategory</div>
-//   )
-// }
-
 import React from "react";
 import { CategoryList } from "./CategoryList";
 import { useSelector, useDispatch } from "react-redux";
@@ -22,7 +14,7 @@ const ManageCategory = () => {
     dispatch({ type: "ADD_CATEGORY", payload:{} });
   };
   const nameNewCategory = (value, previous) => {
-    dispatch({ type: "NAME_NEW_CATEGORY", payload:value });
+    dispatch({ type: "NAME_NEW_CATEGORY", payload:{value, previous }});
     dispatch({ type: "UPDATE_NEW_CATEGORY_SCHEMA", payload:{value, previous }});
   };
   const updateCategory = (payload) => {
