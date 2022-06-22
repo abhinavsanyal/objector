@@ -1,7 +1,7 @@
 import React from "react";
 import {
   ItemWrapper,
-  AddField,
+  AddFieldButton,
   ItemCard,
   RemoveIcon,
   Category,
@@ -18,16 +18,19 @@ export const CategoryList = ({
   schema,
   updateCategory,
   removeCategory,
-  nameNewCategory
+  nameNewCategory,
+  removeCategoryField,
+  hasItemsOfCategory
 }) => {
   const addFieldHandler = (type) => {
-    updateCategory({ updates: { type }, addField: true });
+    let  categoryHasItems = hasItemsOfCategory(type);
+    updateCategory({ updates: { type }, addField: true, fieldType: true }, categoryHasItems );
   };
-  const removeFieldHandler = (category) => {
+  const removeCategoryHandler = (category) => {
     removeCategory(category);
   };
 
-  const onChangeHandler = (type, data, text, fieldType= false) => {
+  const onChangeHandler = (type, data, text, fieldType = false) => {
     const { value } = data;
     let updates = {};
     updates = {
@@ -35,7 +38,7 @@ export const CategoryList = ({
       text,
       type,
     };
-    updateCategory({ updates, addField: false , fieldType});
+    updateCategory({ updates, addField: false, fieldType}, true);
   };
   return (
     <div>
@@ -45,16 +48,34 @@ export const CategoryList = ({
           return (
             <div>
               <ItemCard key={index}>
-                <RemoveIcon id="remove" onClick={()=>removeFieldHandler(category)}> X </RemoveIcon>
+                <RemoveIcon
+                  id="remove"
+                  onClick={() => removeCategoryHandler(category)}
+                >
+                  {" "}
+                  X{" "}
+                </RemoveIcon>
                 <ItemCategory category={category} />
                 <Item
                   fields={fields}
-                  id={category?category:""}
+                  category={category}
+                  categories={categories}
                   onChangeHandler={onChangeHandler}
                   nameNewCategory={nameNewCategory}
+                  removeCategoryField={removeCategoryField}
+                  idx={index}
                 />
               </ItemCard>
-              <AddField onClick={() => {addFieldHandler(category)}}> Add atrribute</AddField>{" "}
+              <AddFieldButton
+                disabled={category === ""}
+                onClick={() => {
+                  if (category === "") return;
+                  addFieldHandler(category);
+                }}
+              >
+                {" "}
+                Add atrribute
+              </AddFieldButton>{" "}
             </div>
           );
         })}

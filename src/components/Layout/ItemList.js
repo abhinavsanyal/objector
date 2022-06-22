@@ -19,9 +19,16 @@ export const ItemList = ({ items, updateItem, removeItem }) => {
     const { value, label } = data;
     updateItem({ value, label, id });
   };
+
+  const filterItems = (items) => {
+    return items.filter(item=>{
+      let fields = item.fields;
+      return fields.length > 0
+    })
+  }
   return (
     <ItemWrapper>
-      {items.map((item, index) => {
+      {filterItems(items).map((item, index) => {
         return (
           <ItemCard key={index}>
             <RemoveIcon

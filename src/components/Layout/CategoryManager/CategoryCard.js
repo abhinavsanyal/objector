@@ -1,9 +1,10 @@
-import React from "react";
-import { TextInput, DatePicker, NumberInput } from "../../Common/inputFields";
+import React, { useEffect } from "react";
+import { TextInput } from "../../Common/inputFields";
 import {
   ItemField,
   InlineText,
   StyledFlexContainer,
+  RemoveIcon,
 } from "./ManageCatergory.styled";
 import { Dropdown } from "semantic-ui-react";
 
@@ -25,46 +26,59 @@ const fieldOptions = [
   },
 ];
 
-export const Item = ({ fields, onChangeHandler, nameNewCategory, id }) => {
+export const Item = ({ fields, onChangeHandler, nameNewCategory, category, idx, removeCategoryField, categories }) => {
   return (
     <div>
       <ItemField>
         <TextInput
-          value={id}
+          value={categories[idx]}
+          id={`${idx}`}
+          key={`${idx}`}
           label={"Object Type"}
-          id={id}
           onChangeHandler={(event, data) => {
-            nameNewCategory(data.value, id);
+            nameNewCategory(data.value,categories[idx],idx);
           }}
         />
-        {fields &&
-          fields.length &&
+        {
+          fields &&
+          fields.length > 0 ?
           fields.map((field, index) => {
             return (
-              <StyledFlexContainer>
-                <InlineText>
-                  <TextInput
-                    key={index}
-                    value={field.fieldText}
-                    onChangeHandler={(event, data) => {
-                      const { value, text, type } = data;
-                      onChangeHandler(id, { value }, field.fieldText);
-                    }}
-                    id={id}
-                  />
-                </InlineText>
+              <div>
+                <StyledFlexContainer fieldKey={field.key}>
+                  <InlineText>
+                    <TextInput
+                      key={index}
+                      value={field.fieldText}
+                      onChangeHandler={(event, data) => {
+                        const { value } = data;
+                        onChangeHandler(category, { value }, field.fieldText, false);
+                      }}
+                      id={categories[idx]}
+                    />
+                  </InlineText>
 
-                <Dropdown
-                  inline
-                  options={fieldOptions}
-                  value={field.fieldType}
-                  onChange={(event, data) => {
-                    onChangeHandler(id, data, field.fieldText, id, true);
+                  <Dropdown
+                    inline
+                    options={fieldOptions}
+                    value={field.fieldType}
+                    onChange={(event, data) => {
+                      onChangeHandler(categories[idx], data, field.fieldText,true);
+                    }}
+                  />
+                <RemoveIcon
+                  id={field.key}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    removeCategoryField({category:category,fieldKey: field.key, label: field.fieldText})
                   }}
-                />
-              </StyledFlexContainer>
-            );
-          })}
+                >
+                  X
+                </RemoveIcon>
+                </StyledFlexContainer>
+              </div>
+            )
+          }):null}
       </ItemField>
     </div>
   );
