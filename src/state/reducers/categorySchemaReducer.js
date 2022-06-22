@@ -80,7 +80,7 @@ const reducer = (state = initialState, action) => {
         fieldList.push({
           fieldType: "text",
           fieldText: "",
-          key: `${type}_${state.length + 1}`,
+          key: `${type}_${fieldList.length + 1}`,
         });
         return { ...state, [type]: fieldList };
       } else {
@@ -106,7 +106,7 @@ const reducer = (state = initialState, action) => {
       const {fieldKey, category} = action.payload;
       
       let fields = schema[category].filter(field => {
-        console.log("REMOVE_CATEGORY_FIELD_FROM_SCHEMA  1:",fields, fieldKey );
+        console.log("REMOVE_CATEGORY_FIELD_FROM_SCHEMA  1:",field.key, fieldKey );
         return field.key !== fieldKey;
       })
       schema[category] = fields;
