@@ -66,7 +66,6 @@ export const Item = ({ fields, onChangeHandler, nameNewCategory, category, idx, 
                       onChangeHandler(categories[idx], data, field.fieldText,true);
                     }}
                   />
-                  {console.log("field key:-", field.key)}
                 <RemoveIcon
                   id={field.key}
                   onClick={(e) => {

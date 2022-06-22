@@ -106,7 +106,6 @@ const reducer = (state = initialState, action) => {
       const {fieldKey, category} = action.payload;
       
       let fields = schema[category].filter(field => {
-        console.log("REMOVE_CATEGORY_FIELD_FROM_SCHEMA  1:",field.key, fieldKey );
         return field.key !== fieldKey;
       })
       schema[category] = fields;
