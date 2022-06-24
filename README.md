@@ -4,12 +4,11 @@ An application used to manage a small inventory , built with React, Redux, JavaS
 
 ## Project Status
 WIP: Working on Refactoring out dead code and  proper seperation of modules. 
-
-#### Note:
+### Demo link: 
+[live demo link: ](http://reltronx.github.io/objector ).
 
 This project is currently in development. Users can add/remove/update any item categories and items . 
 ## Installation and Setup Instructions
-
 #### Get Started:  
 
 Clone down this repository. You will need `node` and `npm` installed globally on your machine.  
