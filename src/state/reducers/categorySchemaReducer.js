@@ -80,7 +80,7 @@ const reducer = (state = initialState, action) => {
         fieldList.push({
           fieldType: "text",
           fieldText: "",
-          key: `${type}_${state.length + 1}`,
+          key: `${type}_${fieldList.length + 1}`,
         });
         return { ...state, [type]: fieldList };
       } else {
@@ -96,21 +96,27 @@ const reducer = (state = initialState, action) => {
         }
         return { ...state, [type]: fieldList };
       }
-    case "REMOVE_CATEGORY":
+    case "REMOVE_CATEGORY_FROM_SCHEMA":
       const type = action.payload;
       const modifiedList = { ...state };
       delete modifiedList[type];
       return modifiedList;
-    case "UPDATE_CATEGORY_NAME":
-      const objectType = action.payload["type"];
-      const category = state[objectType];
-      return state;
+    case "REMOVE_CATEGORY_FIELD_FROM_SCHEMA":
+      let schema = { ...state };
+      const {fieldKey, category} = action.payload;
+      
+      let fields = schema[category].filter(field => {
+        return field.key !== fieldKey;
+      })
+      schema[category] = fields;
+      return schema;
     case "UPDATE_NEW_CATEGORY_SCHEMA":
       const categoryName = action.payload["value"];
       const previousName = action.payload["previous"];
       let newState = {...state};
       let oldData = [];
       if(newState[previousName]) {
+
          oldData = [...newState[previousName]];
          delete newState[previousName];
       } 

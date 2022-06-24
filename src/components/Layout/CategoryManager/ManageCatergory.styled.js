@@ -12,15 +12,20 @@ export const ItemWrapper = styled.div`
 `;
 export const ItemField = styled.div`
   margin: 5px;
+  position: relative;
 `;
 export const Category = styled.div`
   position: absolute;
   top: -8px;
   left: -8px;
-  background: navajowhite;
+  background: #ED9121;
   padding 8px 15px;
   border-radius:7%;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  color: white;
+  font-weight: bold;
+  font-size: 17;
+
 `;
 
 export const RemoveIcon = styled.div`
@@ -65,9 +70,24 @@ export const StyledFlexContainer = styled.div`
   display: flex;
   width: 100%;
   justify-content: flex-start;
-  align-items: center
+  transition: all 0.07s linear 0.09s;
+  position: relative;
+  &:#${({fieldKey})=>fieldKey} {
+    opacity: 0;
+    transition: all 0.07s linear 0.09s;
+  }
+  &:hover {
+    background: #7393B3;
+    margin-top: 0.2rem;
+    border-radius: 0.3em;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  }
+  &:hover #${({fieldKey})=>fieldKey} {
+    opacity: 1;
+  }
+  align-items: center;
 `;
-export const AddField = styled.div`
+export const AddFieldButton = styled.div`
   display: flex;
   flex: 0.5;
   justify-content: center;
@@ -77,8 +97,10 @@ export const AddField = styled.div`
   margin: 15px 15px;
   border-radius: 0.2em;
   padding: 0.5em 2em;
-  cursor: pointer;
+  cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
   height: 2em;
   max-width: 20em;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+
+  background: ${({ disabled }) => (disabled ? "grey" : "#3f3f4e")};
 `;

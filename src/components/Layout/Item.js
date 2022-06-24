@@ -48,9 +48,20 @@ const fieldSelector = (type, key, value, label, onChangeHandler, id) => {
 };
 
 export const Item = ({ fields, onChangeHandler, id }) => {
+
+  // Filter out fields that are yet to be configured
+  const filterFields = (fields) => {
+    return fields.filter(field=>{
+      const { type, value, label } = field;
+      if(label === "" || !label) return false;
+      return true;
+    })
+  }
+  console.log("Render: Item");
+
   return (
     <ItemField>
-      {fields.map((field, index) => {
+      {filterFields(fields).map((field, index) => {
         const { type, value, label } = field;
         return fieldSelector(type, index, value, label, onChangeHandler, id);
       })}

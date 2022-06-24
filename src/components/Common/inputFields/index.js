@@ -15,7 +15,7 @@ export const DatePicker = ({ value, label, onChangeHandler, id }) => {
   );
 };
 
-export const TextInput = ({ value, label, onChangeHandler, id }) => {
+export const TextInput = ({ value, label, onChangeHandler, id , inverted = false}) => {
   return (
     <StyledField>
       <Input
@@ -24,6 +24,7 @@ export const TextInput = ({ value, label, onChangeHandler, id }) => {
         type="text"
         value={value}
         onChange={(event, data) => onChangeHandler(event, data, id)}
+        inverted ={ inverted}
       />
     </StyledField>
   );

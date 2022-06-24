@@ -9,13 +9,16 @@ function App() {
     <Router>
       <LayoutWrapper>
         <Navbar />
-        <Routes>
-          <Route path="/" element={ <PageSelector />} />
-          <Route path="/All" element={ <PageSelector />} />
-          <Route  path="/category/:name" element={ <PageSelector filter={true}/>} />
-          <Route path="/ManageCategories" element={ <ManageCategory />} />
-        </Routes>
-        {/* <PageSelector /> */}
+          <Routes>
+            <Route path="/" element={<PageSelector />} />
+            <Route path="/All" element={<PageSelector />} />
+            {/* <Route path="/objector" element={<PageSelector />} /> */}
+            <Route
+              path="/category/:name"
+              element={<PageSelector />}
+            />
+            <Route path="/ManageCategories" element={<ManageCategory />} />
+          </Routes>
       </LayoutWrapper>
     </Router>
   );

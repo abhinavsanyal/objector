@@ -17,10 +17,14 @@ export const Category = styled.div`
   position: absolute;
   top: -8px;
   left: -8px;
-  background: navajowhite;
+  background: #ED9121;
   padding 8px 15px;
   border-radius:7%;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  color: white;
+  font-weight: bold;
+  font-size: 17;
+
 `;
 
 export const RemoveIcon = styled.div`

@@ -2,12 +2,13 @@ import React from "react";
 import { Button, Dropdown, Menu } from "semantic-ui-react";
 import { DropdownWrapper } from "./AddItemButton.styled";
 import { useSelector, useDispatch } from "react-redux";
+import { FlexContainer, FLEX_DIRECTIONS, FLEX_POSITION_OPTIONS } from "../Common/styles";
 
 const AddItemButton = ({ categories, addItem, showDropdown, category }) => {
-  const { categorySchema , items } = useSelector((state) => state);
+  const { categorySchema, items } = useSelector((state) => state);
 
   const [isTypeSelected, setIsTypeSelected] = React.useState();
-  const [selectedType, setSelectedType] = React.useState("");
+  const [selectedType, setSelectedType] = React.useState("Type");
 
   const categoryOptions = () =>
     categories.map((category, index) => {
@@ -15,8 +16,7 @@ const AddItemButton = ({ categories, addItem, showDropdown, category }) => {
     });
 
   const addItemHandler = () => {
-
-    let schemaType = !showDropdown ? category: selectedType;
+    let schemaType = !showDropdown ? category : selectedType;
     let fields = categorySchema[schemaType];
     fields = fields.map((field) => {
       return { type: field.fieldType, value: "", label: field.fieldText };
@@ -28,8 +28,43 @@ const AddItemButton = ({ categories, addItem, showDropdown, category }) => {
     });
   };
 
+  console.log("Render: PageSelector");
+
   return (
-    <DropdownWrapper>
+    <FlexContainer direction={FLEX_DIRECTIONS.row} justify={FLEX_POSITION_OPTIONS.start} style={{margin:"2em"}} >
+      <Button.Group  >
+        <Button
+          disabled={!showDropdown ? false : !isTypeSelected}
+          onClick={() => {
+            addItemHandler();
+          }}
+        >
+          {`Add ${selectedType}`}
+        </Button>
+        {showDropdown && (
+          <Dropdown
+            className="button icon"
+            floating
+            trigger={<></>}
+            closeOnEscape
+            options={categoryOptions()}
+            onChange={(event, data) => {
+              if (data.value && data.value !== "") {
+                setIsTypeSelected(true);
+                setSelectedType(data.value);
+              }
+            }}
+          />
+        )}
+      </Button.Group>
+    </FlexContainer>
+  );
+};
+
+export default AddItemButton;
+
+{
+  /* 
       <Button
         disabled={ !showDropdown ? false:!isTypeSelected}
         onClick={() => {
@@ -52,10 +87,5 @@ const AddItemButton = ({ categories, addItem, showDropdown, category }) => {
             }
           }}
           />
-      </Menu>
-      }
-    </DropdownWrapper>
-  );
-};
-
-export default AddItemButton;
+      </Menu> */
+}
