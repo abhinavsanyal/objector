@@ -40,6 +40,7 @@ export const CategoryList = ({
     };
     updateCategory({ updates, addField: false, fieldType}, true);
   };
+  console.log("Render: CategoryList")
   return (
     <div>
       <ItemWrapper>

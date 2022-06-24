@@ -3,9 +3,14 @@ import { useSelector, useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { ItemList } from "./ItemList";
 import AddItemButton from "./AddItemButton";
-import { PageWrapper } from "./PageSelector.styled";
+import {
+  FLEX_POSITION_OPTIONS,
+  FLEX_WRAP_OPTIONS,
+  FlexContainer,
+  FlexItem,
+} from "../Common/styles";
 
-const PageSelector = ({ filter }) => {
+const PageSelector = () => {
   const { items, categories } = useSelector((state) => state);
   const [path, setPath] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
@@ -13,14 +18,13 @@ const PageSelector = ({ filter }) => {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    let match = pathname.split("/").pop()
+    let match = pathname.split("/").pop();
     setPath(match);
-    if(match ==="All" || match === "") {
-
-    setShowDropdown(true);
-  } else {
-    setShowDropdown(false);
-  }
+    if (match === "All" || match === "") {
+      setShowDropdown(true);
+    } else {
+      setShowDropdown(false);
+    }
   }, [pathname]);
 
   // Action dispatchers for item crud.
@@ -35,22 +39,60 @@ const PageSelector = ({ filter }) => {
   };
 
   const filterItems = () => {
-    if(path ==="All" || path === "") {
-      return items;
-    } 
-    return items.filter((item) => item.category === path)
+    let filteredList = items;
+    if (path === "All" || path === "") {
+      // Filter lists that have fields.
+      return filteredList.filter((item) => {
+        let fields = item.fields;
+        return fields.length > 0;
+      });
+    } else {
+      // Filter by category
+      filteredList = filteredList.filter((item) => item.category === path);
+      // Filter lists that have fields.
+      return filteredList.filter((item) => {
+        let fields = item.fields;
+        return fields.length > 0;
+      });
+    }
   };
 
   const renderSelectedPage = () => {
+    console.log("Render: PageSelector");
     return (
-      <PageWrapper>
-        <ItemList
-          items={filterItems()}
-          updateItem={updateItem}
-          removeItem={removeItem}
-        />
-        <AddItemButton showDropdown={showDropdown} category={!showDropdown && path} categories={categories} addItem={addItem} />
-      </PageWrapper>
+      <FlexContainer
+        justify={FLEX_POSITION_OPTIONS.center}
+        align={FLEX_POSITION_OPTIONS.unset}
+        wrap={FLEX_WRAP_OPTIONS.reverse}
+      >
+        <FlexItem
+          justify={FLEX_POSITION_OPTIONS.end}
+          // align={FLEX_POSITION_OPTIONS.unset}
+          width={1}
+        >
+          <ItemList
+            items={filterItems()}
+            updateItem={updateItem}
+            removeItem={removeItem}
+          />
+        </FlexItem>
+        <FlexItem
+          justify={FLEX_POSITION_OPTIONS.start}
+          align={FLEX_POSITION_OPTIONS.baseline}
+          width={0.4}
+        >
+          <FlexContainer justify={FLEX_POSITION_OPTIONS.start}>
+            <FlexItem>
+              <AddItemButton
+                showDropdown={showDropdown}
+                category={!showDropdown && path}
+                categories={categories}
+                addItem={addItem}
+              />
+            </FlexItem>
+          </FlexContainer>
+        </FlexItem>
+      </FlexContainer>
     );
   };
 

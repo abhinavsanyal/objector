@@ -27,6 +27,7 @@ const fieldOptions = [
 ];
 
 export const Item = ({ fields, onChangeHandler, nameNewCategory, category, idx, removeCategoryField, categories }) => {
+  console.log("Render: CategoryItem");
   return (
     <div>
       <ItemField>
